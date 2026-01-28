@@ -1,36 +1,92 @@
-# FastPrint Junior Programmer Test - Django Implementation
+# Tes Junior Programmer – FastPrint
 
-Repository ini berisi solusi teknis untuk Tes Junior Programmer FastPrint. Aplikasi ini dibangun menggunakan **Django Framework** dan **MySQL**, mencakup integrasi API eksternal dengan otentikasi dinamis, manajemen database, dan fitur CRUD (Create, Read, Update, Delete).
+**Django & MySQL Implementation**
 
-## 📋 Fitur Utama
+Repository ini berisi hasil pengerjaan **Tes Junior Programmer FastPrint** menggunakan **Django Framework** dan **MySQL**, dengan integrasi API eksternal FastPrint serta fitur CRUD dan validasi data.
 
-Sesuai dengan kebutuhan tes, aplikasi ini memiliki kemampuan:
-* **Integrasi API Dinamis:** Script otomatis untuk mengambil data dari API FastPrint dengan algoritma otentikasi (Username & Password) yang berubah sesuai waktu server.
-* **Filter Otomatis:** Menampilkan data produk yang hanya memiliki status "bisa dijual".
-* **CRUD System:** Fitur Tambah, Edit, dan Hapus produk.
-* **Validasi Data:** Validasi input menggunakan Django Forms dan Serializer (memastikan harga angka & nama terisi).
-* **Konfirmasi Keamanan:** Alert konfirmasi JavaScript saat menghapus data.
-* **Tech Stack Modern:** Menggunakan Django ORM untuk relasi tabel (Produk, Kategori, Status).
+---
 
-## 🛠️ Teknologi yang Digunakan
+## Fitur Utama
 
-* **Backend:** Python 3.10+, Django 5.x
-* **Database:** MySQL
-* **Frontend:** HTML5, Bootstrap 5
-* **Libraries:** `requests` (API Call), `mysqlclient` (DB Driver), `djangorestframework` (Serializer Support)
+* Integrasi API FastPrint dengan **autentikasi dinamis**
+* Penyimpanan data produk ke database
+* Menampilkan produk dengan status **“bisa dijual”**
+* Fitur **Tambah, Edit, Hapus** produk
+* Validasi form (nama wajib, harga numerik)
+* Konfirmasi hapus menggunakan JavaScript `confirm()`
+* Relasi database menggunakan Django ORM
+* Serializer menggunakan Django REST Framework
 
-## ⚙️ Prasyarat (Prerequisites)
+---
 
-Sebelum menjalankan aplikasi, pastikan Anda telah menginstal:
-1.  **Python** (versi 3.8 ke atas)
-2.  **MySQL Server** (bisa menggunakan Laragon/XAMPP)
-3.  **Git**
+## Struktur Database
 
-## 🚀 Panduan Instalasi (Step-by-Step)
+**Produk**
 
-Ikuti langkah-langkah berikut untuk menjalankan project di local environment Anda:
+* id_produk
+* nama_produk
+* harga
+* kategori (FK)
+* status (FK)
 
-### 1. Clone Repository
+**Kategori**
+
+* id_kategori
+* nama_kategori
+
+**Status**
+
+* id_status
+* nama_status
+
+---
+
+## API FastPrint
+
+**Endpoint**
+
+```
+https://recruitment.fastprint.co.id/tes/api_tes_programmer
+```
+
+**Autentikasi**
+
+* Username berubah mengikuti waktu server
+* Password (MD5):
+
+```
+bisacoding-{tanggal}-{bulan}-{2 digit tahun}
+```
+
+API diakses menggunakan library `requests` dengan pengecekan **response, header, dan cookies**.
+
+---
+
+## Teknologi
+
+* Python 3.10+
+* Django 5.x
+* MySQL
+* Bootstrap 5
+* Django REST Framework
+
+---
+
+## Cara Menjalankan
+
 ```bash
-git clone [https://github.com/username-anda/fastprint-test.git](https://github.com/username-anda/fastprint-test.git)
-cd fastprint-test
+git clone https://github.com/username-anda/fastprint_test.git
+cd fastprint_test
+python -m venv venv
+source venv/bin/activate   # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+```
+
+Akses:
+
+```
+http://127.0.0.1:8000/
+```
+
